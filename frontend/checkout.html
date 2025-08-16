@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - SoldOut</title>
+    <style>
+      :root {
+        --primary-color: #e7750b;
+        --secondary-color: #2c3e50;
+        --accent-color: #e74c3c;
+        --text-color: #333;
+        --light-gray: #f5f5f5;
+        --border-color: #ddd;
+        --success-color: #2ecc71;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Roboto", sans-serif;
+      }
+
+      body {
+        background-color: #f9f9f9;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .checkout-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      h1,
+      h2 {
+        color: var(--secondary-color);
+        margin-bottom: 1.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .order-summary {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      #cart-items {
+        list-style: none;
+        margin-bottom: 1.5rem;
+      }
+
+      #cart-items li {
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      #total-price {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+      }
+
+      #checkout-form {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      input {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+      }
+
+      .paystack-button {
+        background-color: #0ab579;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 1rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .paystack-button:hover {
+        background-color: #089e6b;
+        transform: translateY(-2px);
+      }
+
+      @media (min-width: 768px) {
+        .checkout-container {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .order-summary {
+          position: sticky;
+          top: 1rem;
+          align-self: start;
+        }
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="checkout-container">
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h2>Your Order</h2>
+        <ul id="cart-items">
+          <!-- Example cart items (would be dynamic in production) -->
+          <li>
+            <span>Product 1 × 1</span>
+            <span>$19.99</span>
+          </li>
+          <li>
+            <span>Product 2 × 2</span>
+            <span>$59.98</span>
+          </li>
+          <li>
+            <span>Shipping</span>
+            <span>$5.99</span>
+          </li>
+        </ul>
+        <p>Total: <span id="total-price">$85.96</span></p>
+      </div>
+
+      <!-- Checkout Form -->
+      <form id="checkout-form">
+        <h1>Checkout</h1>
+
+        <h2>Shipping Information</h2>
+        <input type="text" id="full-name" placeholder="Full Name" required />
+        <input type="text" id="address" placeholder="Address" required />
+        <input type="text" id="city" placeholder="City" required />
+        <input
+          type="text"
+          id="zip-code"
+          placeholder="Zip/Postal Code"
+          required
+        />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="tel" id="phone" placeholder="Phone Number" required />
+
+        <h2>Payment Method</h2>
+        <p style="margin-bottom: 1rem">
+          Pay securely with Paystack (cards, mobile money, bank transfers)
+        </p>
+
+        <button type="button" id="paystack-btn" class="paystack-button">
+          <i class="fas fa-lock"></i> Pay Securely with Paystack
+        </button>
+      </form>
+    </div>
+
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script>
+      // Paystack payment handler
+      document
+        .getElementById("paystack-btn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // Validate form
+          const form = document.getElementById("checkout-form");
+          const requiredFields = form.querySelectorAll("[required]");
+          let isValid = true;
+
+          requiredFields.forEach((field) => {
+            if (!field.value.trim()) {
+              field.style.borderColor = "var(--accent-color)";
+              isValid = false;
+            } else {
+              field.style.borderColor = "var(--border-color)";
+            }
+          });
+
+          if (!isValid) {
+            alert("Please fill in all required fields");
+            return;
+          }
+
+          // Get form values
+          const email = document.getElementById("email").value;
+          const amount = 8596; // Amount in kobo (85.96 USD * 100)
+          const name = document.getElementById("full-name").value;
+          const phone = document.getElementById("phone").value;
+          const address = document.getElementById("address").value;
+          const city = document.getElementById("city").value;
+          const zipCode = document.getElementById("zip-code").value;
+
+          // In production, you should get this from your server for security
+          const publicKey = "pk_test_your_paystack_public_key"; // Replace with your Paystack public key
+
+          const handler = PaystackPop.setup({
+            key: publicKey,
+            email: email,
+            amount: amount,
+            currency: "USD", // or 'GHS' for Ghana, 'NGN' for Nigeria
+            ref: "SO-" + Math.floor(Math.random() * 1000000000 + 1), // Generate a random reference
+            firstname: name.split(" ")[0],
+            lastname: name.split(" ")[1] || "",
+            metadata: {
+              custom_fields: [
+                {
+                  display_name: "Phone Number",
+                  variable_name: "phone",
+                  value: phone,
+                },
+                {
+                  display_name: "Shipping Address",
+                  variable_name: "address",
+                  value: `${address}, ${city}, ${zipCode}`,
+                },
+              ],
+            },
+            callback: function (response) {
+              // Payment successful - send reference to your server for verification
+              alert("Payment complete! Reference: " + response.reference);
+              // Here you would typically submit the form to your server
+              // or redirect to a success page
+              console.log("Payment successful", response);
+
+              // In a real app, you would:
+              // 1. Send the reference to your backend for verification
+              // 2. Save the order to your database
+              // 3. Redirect to a success page
+            },
+            onClose: function () {
+              // Payment window closed
+              console.log("Payment window closed");
+            },
+          });
+
+          handler.openIframe();
+        });
+    </script>
+  </body>
+</html>

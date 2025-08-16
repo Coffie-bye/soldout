@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SoldOut | Premium Online Shopping</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* ===== MODERN COLOR THEME ===== */
+      :root {
+        --primary: #ff5e5b;
+        --primary-dark: #e04f4c;
+        --dark: #1e1e24;
+        --light: #ffffff;
+        --gray: #f8f8f8;
+        --text: #2d2d2d;
+        --text-light: #888888;
+        --accent: #00cecb;
+        --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        --radius: 12px;
+        --spacing: 1.5rem;
+      }
+
+      /* ===== BASE STYLES ===== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: var(--gray);
+        color: var(--text);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        width: 92%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* ===== GLASSMORPHISM NAVBAR ===== */
+      .top-nav {
+        background: rgba(30, 30, 36, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 1.25rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing);
+      }
+
+      .logo {
+        height: 2.75rem;
+        transition: var(--transition);
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+      }
+
+      /* ===== MODERN SEARCH BAR ===== */
+      .search-bar {
+        flex: 1;
+        max-width: 600px;
+        display: flex;
+        position: relative;
+      }
+
+      .search-bar input {
+        width: 100%;
+        padding: 0.85rem 1.25rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+        transition: var(--transition);
+        padding-left: 3rem;
+      }
+
+      .search-bar input::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .search-bar input:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 0 2px var(--primary);
+      }
+
+      .search-bar::before {
+        content: "\f002";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 1.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.7);
+        pointer-events: none;
+      }
+
+      /* ===== NAV LINKS ===== */
+      .nav-links {
+        display: flex;
+        gap: 1.75rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: var(--transition);
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .cart-count {
+        background: var(--primary);
+        color: white;
+        border-radius: 50%;
+        width: 1.5rem;
+        height: 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        margin-left: 0.25rem;
+      }
+
+      /* ===== HERO BANNER ===== */
+      .hero-banner {
+        background: linear-gradient(135deg, var(--primary) 0%, #ff9a5b 100%);
+        color: white;
+        padding: 5rem 0;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-banner::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+        background-size: 100px 100px;
+        opacity: 0.3;
+      }
+
+      .banner-content {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .banner-content h1 {
+        font-size: 3.25rem;
+        margin-bottom: 1.25rem;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .banner-content p {
+        font-size: 1.35rem;
+        margin-bottom: 2.5rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .banner-btn {
+        background: var(--dark);
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: var(--shadow);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .banner-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        background: black;
+      }
+
+      .banner-btn i {
+        transition: var(--transition);
+      }
+
+      .banner-btn:hover i {
+        transform: translateX(3px);
+      }
+
+      /* ===== FLASH SALE ===== */
+      .countdown-container {
+        background: var(--dark);
+        color: white;
+        padding: 1.75rem;
+        margin: 3rem 0;
+        border-radius: var(--radius);
+        text-align: center;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .countdown-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 8px;
+        height: 100%;
+        background: var(--primary);
+      }
+
+      .countdown-container h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+        font-weight: 700;
+      }
+
+      .countdown-timer {
+        font-size: 2rem;
+        font-family: "Space Mono", monospace;
+        letter-spacing: 2px;
+        font-weight: 700;
+        color: var(--primary);
+        background: rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+      }
+
+      /* ===== PRODUCT GRID ===== */
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        font-weight: 700;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 50%;
+        height: 4px;
+        background: var(--primary);
+        border-radius: 2px;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem 0;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+      }
+
+      .product-image {
+        height: 280px;
+        background: #f9f9f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-image img {
+        max-height: 100%;
+        object-fit: contain;
+        transition: var(--transition);
+      }
+
+      .product-card:hover .product-image img {
+        transform: scale(1.08);
+      }
+
+      .product-info {
+        padding: 1.75rem;
+      }
+
+      .product-info h3 {
+        margin-bottom: 0.75rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      .product-info .category {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      .price {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 1rem 0;
+      }
+
+      .old-price {
+        text-decoration: line-through;
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
+
+      .new-price {
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+
+      .product-card button {
+        width: 100%;
+        padding: 0.85rem;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 0.5rem;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+      }
+
+      .product-card button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+
+      .product-card button:active {
+        transform: translateY(0);
+      }
+
+      .badge {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background: var(--primary);
+        color: white;
+        padding: 0.35rem 1rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        z-index: 1;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin: 0.5rem 0;
+      }
+
+      .rating i {
+        color: #ffc107;
+        font-size: 0.9rem;
+      }
+
+      .rating-count {
+        color: var(--text-light);
+        font-size: 0.85rem;
+        margin-left: 0.25rem;
+      }
+
+      /* ===== NOTIFICATION ===== */
+      .notification {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--dark);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        z-index: 1000;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        opacity: 0;
+      }
+
+      .notification i {
+        color: var(--primary);
+        font-size: 1.25rem;
+      }
+
+      @keyframes slideIn {
+        from {
+          bottom: -50px;
+          opacity: 0;
+        }
+        to {
+          bottom: 2rem;
+          opacity: 1;
+        }
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 4rem 0 0;
+        margin-top: 4rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 3rem;
+        padding: 2rem 0;
+      }
+
+      .footer-section h3 {
+        color: white;
+        margin-bottom: 1.75rem;
+        font-size: 1.35rem;
+        position: relative;
+        padding-bottom: 0.75rem;
+      }
+
+      .footer-section h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 50px;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 3px;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 1rem;
+      }
+
+      .footer-section ul li a {
+        color: #ccc;
+        text-decoration: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .footer-section ul li a:hover {
+        color: var(--primary);
+        padding-left: 0.5rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 1.25rem;
+        transition: var(--transition);
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .social-links a:hover {
+        color: var(--primary);
+        background: rgba(255, 94, 91, 0.2);
+        transform: translateY(-3px);
+      }
+
+      .newsletter-form {
+        display: flex;
+        margin-top: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        overflow: hidden;
+      }
+
+      .newsletter-form input {
+        flex: 1;
+        padding: 0.85rem 1.5rem;
+        border: none;
+        background: transparent;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .newsletter-form input::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .newsletter-form button {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 0 1.75rem;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .newsletter-form button:hover {
+        background: var(--primary-dark);
+        padding: 0 2rem;
+      }
+
+      .copyright {
+        text-align: center;
+        padding: 2rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #aaa;
+        font-size: 0.95rem;
+      }
+
+      /* ===== RESPONSIVE DESIGN ===== */
+      @media (max-width: 1024px) {
+        .nav-container {
+          flex-wrap: wrap;
+          row-gap: 1rem;
+        }
+
+        .search-bar {
+          order: 3;
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-banner {
+          padding: 4rem 0;
+        }
+
+        .banner-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .banner-content p {
+          font-size: 1.15rem;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero-banner {
+          padding: 3rem 0;
+        }
+
+        .banner-content h1 {
+          font-size: 2rem;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .countdown-timer {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navbar -->
+    <nav class="top-nav">
+      <div class="container nav-container">
+        <img
+          src="download__14_-removebg-preview.png"
+          alt="SoldOut Logo"
+          class="logo"
+          loading="lazy"
+          width="150"
+          height="40"
+        />
+        <div class="search-bar">
+          <input
+            type="text"
+            placeholder="Search products..."
+            aria-label="Search products"
+          />
+          <button aria-label="Search"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="nav-links">
+          <a href="vendor login-register.html" id="vendor-link"
+            ><i class="fas fa-store"></i> Sell</a
+          >
+          <a href="account.html"><i class="fas fa-user"></i> Account</a>
+          <a href="cart.html"
+            ><i class="fas fa-shopping-cart"></i> Cart
+            <span class="cart-count">0</span></a
+          >
+        </div>
+      </div>
+      <button class="menu-toggle" aria-label="Menu">☰</button>
+    </nav>
+
+    <!--- Hero Banner --->
+    <section class="hero-banner">
+      <div class="banner-content">
+        <h1>Summer Sale Up to 50% Off</h1>
+        <p>Discover amazing deals on top brands. Limited time offer!</p>
+        <button class="banner-btn" onclick="window.location.href='shop.html'">
+          Shop Now <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+      <!-- Flash Sales Section -->
+      <section class="countdown-container">
+        <h2>FLASH SALE ENDS IN</h2>
+        <div class="countdown-timer">24:00:00</div>
+      </section>
+
+      <!-- Featured Products -->
+      <h2 class="section-title">Featured Products</h2>
+      <div class="products-grid" id="products-root">
+        <!-- Products will be inserted here by React -->
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container footer-content">
+        <div class="footer-section">
+          <h3>Shop</h3>
+          <ul>
+            <li>
+              <a href="electronics.html"
+                ><i class="fas fa-mobile-alt"></i> Electronics</a
+              >
+            </li>
+            <li>
+              <a href="fashion.html"><i class="fas fa-tshirt"></i> Fashion</a>
+            </li>
+            <li>
+              <a href="home-kitchen.html"
+                ><i class="fas fa-home"></i> Home & Kitchen</a
+              >
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-book"></i> Books</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-gamepad"></i> Gaming</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Help Center</h3>
+          <ul>
+            <li>
+              <a href="customer-service.html"
+                ><i class="fas fa-headset"></i> Customer Service</a
+              >
+            </li>
+            <li>
+              <a href="track order.html"
+                ><i class="fas fa-truck"></i> Track Order</a
+              >
+            </li>
+            <li>
+              <a href="retuns.html"
+                ><i class="fas fa-exchange-alt"></i> Returns & Refunds</a
+              >
+            </li>
+            <li>
+              <a href="faq.html"><i class="fas fa-question-circle"></i> FAQs</a>
+            </li>
+            <li>
+              <a href="about-us.html"
+                ><i class="fas fa-info-circle"></i> About Us</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Account</h3>
+          <ul>
+            <li>
+              <a href="account.html"><i class="fas fa-user"></i> My Account</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-heart"></i> Wishlist</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-bell"></i> Notifications</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-history"></i> Order History</a>
+            </li>
+            <li>
+              <a href="track order.html"
+                ><i class="fas fa-map-marker-alt"></i> Track Order</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Stay Connected</h3>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="Pinterest"
+              ><i class="fab fa-pinterest-p"></i
+            ></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+          <p>Subscribe to our newsletter for updates</p>
+          <form class="newsletter-form">
+            <input
+              type="email"
+              placeholder="Your email address"
+              aria-label="Email address"
+            />
+            <button type="submit" aria-label="Subscribe">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>
+          &copy; <span id="current-year">2023</span> SoldOut. All rights
+          reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- React App Script -->
+    <script type="text/babel">
+      // Sample product data
+      const products = [
+        {
+          id: 1,
+          name: "Wireless Noise-Cancelling Headphones",
+          category: "Electronics",
+          price: 199.99,
+          oldPrice: 299.99,
+          image:
+            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+          badge: "33% OFF",
+          rating: 4.5,
+          reviews: 124,
+        },
+        {
+          id: 2,
+          name: "Smart Watch Pro Series 5",
+          category: "Wearables",
+          price: 249.99,
+          oldPrice: 349.99,
+          image:
+            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+          badge: "LIMITED",
+          rating: 4.8,
+          reviews: 89,
+        },
+        {
+          id: 3,
+          name: "Premium Running Shoes",
+          category: "Footwear",
+          price: 129.99,
+          oldPrice: 159.99,
+          image:
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+          badge: "HOT",
+          rating: 4.7,
+          reviews: 215,
+        },
+        {
+          id: 4,
+          name: "Portable Bluetooth Speaker",
+          category: "Audio",
+          price: 79.99,
+          oldPrice: 99.99,
+          image:
+            "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+          badge: "20% OFF",
+          rating: 4.3,
+          reviews: 67,
+        },
+        {
+          id: 5,
+          name: "4K Professional Camera",
+          category: "Photography",
+          price: 899.99,
+          oldPrice: 1199.99,
+          image:
+            "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+          badge: "25% OFF",
+          rating: 4.9,
+          reviews: 42,
+        },
+        {
+          id: 6,
+          name: "Mechanical Gaming Keyboard",
+          category: "Gaming",
+          price: 89.99,
+          oldPrice: 129.99,
+          image:
+            "https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+          badge: "30% OFF",
+          rating: 4.6,
+          reviews: 178,
+        },
+      ];
+
+      // Product Card Component
+      function ProductCard({ product }) {
+        const [cartCount, setCartCount] = React.useState(0);
+        const [isWishlisted, setIsWishlisted] = React.useState(false);
+
+        const addToCart = () => {
+          setCartCount(cartCount + 1);
+          showNotification(`${product.name} added to cart!`);
+        };
+
+        const toggleWishlist = () => {
+          setIsWishlisted(!isWishlisted);
+          showNotification(
+            isWishlisted
+              ? `Removed from wishlist`
+              : `${product.name} added to wishlist!`
+          );
+        };
+
+        // Render star ratings
+        const renderStars = () => {
+          const stars = [];
+          const fullStars = Math.floor(product.rating);
+          const hasHalfStar = product.rating % 1 >= 0.5;
+
+          for (let i = 1; i <= 5; i++) {
+            if (i <= fullStars) {
+              stars.push(<i key={i} className="fas fa-star"></i>);
+            } else if (i === fullStars + 1 && hasHalfStar) {
+              stars.push(<i key={i} className="fas fa-star-half-alt"></i>);
+            } else {
+              stars.push(<i key={i} className="far fa-star"></i>);
+            }
+          }
+
+          return stars;
+        };
+
+        return (
+          <div className="product-card">
+            <div className="product-image">
+              <img src={product.image} alt={product.name} loading="lazy" />
+              {product.badge && <span className="badge">{product.badge}</span>}
+              <button
+                className="wishlist-btn"
+                onClick={toggleWishlist}
+                aria-label={
+                  isWishlisted ? "Remove from wishlist" : "Add to wishlist"
+                }
+                style={{
+                  position: "absolute",
+                  top: "1rem",
+                  right: "1rem",
+                  background: "rgba(255, 255, 255, 0.9)",
+                  border: "none",
+                  width: "2.5rem",
+                  height: "2.5rem",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  zIndex: "1",
+                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                  color: isWishlisted ? "var(--primary)" : "#888",
+                }}
+              >
+                <i
+                  className={isWishlisted ? "fas fa-heart" : "far fa-heart"}
+                ></i>
+              </button>
+            </div>
+            <div className="product-info">
+              <span className="category">{product.category}</span>
+              <h3>{product.name}</h3>
+              <div className="rating">
+                {renderStars()}
+                <span className="rating-count">({product.reviews})</span>
+              </div>
+              <div className="price">
+                <span className="old-price">
+                  ${product.oldPrice.toFixed(2)}
+                </span>
+                <span className="new-price">${product.price.toFixed(2)}</span>
+              </div>
+              <button onClick={addToCart}>
+                <i className="fas fa-cart-plus"></i> Add to Cart{" "}
+                {cartCount > 0 && `(${cartCount})`}
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      // Banner button click
+      document
+        .querySelector(".banner-btn")
+        .addEventListener("click", function () {
+          window.location.href = "#products-root";
+        });
+
+      // Notification Component
+      function Notification({ message, visible }) {
+        if (!visible) return null;
+        return (
+          <div className="notification">
+            <i className="fas fa-check-circle"></i>
+            {message}
+          </div>
+        );
+      }
+
+      // Main App Component
+      function App() {
+        const [notification, setNotification] = React.useState({
+          visible: false,
+          message: "",
+        });
+
+        const showNotification = (message) => {
+          setNotification({ visible: true, message });
+          setTimeout(
+            () => setNotification({ visible: false, message: "" }),
+            3000
+          );
+        };
+
+        return (
+          <>
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+            <Notification
+              visible={notification.visible}
+              message={notification.message}
+            />
+          </>
+        );
+      }
+
+      // Render React App
+      const root = ReactDOM.createRoot(
+        document.getElementById("products-root")
+      );
+      root.render(<App />);
+    </script>
+
+    <!-- Original JavaScript -->
+    <script>
+      // Set current year in footer
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+
+      // Mobile menu toggle
+      document
+        .querySelector(".menu-toggle")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-links").classList.toggle("active");
+          this.textContent = this.textContent === "☰" ? "✕" : "☰";
+        });
+
+      // Countdown timer
+      function updateCountdown() {
+        const timer = document.querySelector(".countdown-timer");
+        let time = 24 * 60 * 60; // 24 hours in seconds
+
+        setInterval(() => {
+          time--;
+          const hours = Math.floor(time / 3600);
+          const minutes = Math.floor((time % 3600) / 60);
+          const seconds = time % 60;
+          timer.textContent = `${hours.toString().padStart(2, "0")}:${minutes
+            .toString()
+            .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+        }, 1000);
+      }
+      updateCountdown();
+
+      // Banner button click
+      document
+        .querySelector(".banner-btn")
+        .addEventListener("click", function () {
+          window.location.href = "#products-root";
+        });
+
+      // Search functionality
+      document
+        .querySelector(".search-bar button")
+        .addEventListener("click", function () {
+          const query = document.querySelector(".search-bar input").value;
+          if (query.trim()) {
+            window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+          }
+        });
+
+      // Press Enter in search bar
+      document
+        .querySelector(".search-bar input")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            document.querySelector(".search-bar button").click();
+          }
+        });
+    </script>
+  </body>
+</html>
